@@ -1,0 +1,24 @@
+services:
+  mopidy:
+    image: ghcr.io/tyz/mopidy-docker:3.4.2
+    container_name: mopidy
+    restart: unless-stopped
+
+    # Required for zeroconf
+    network_mode: host
+
+    # For ALSA dmix
+    ipc: host
+
+    # Access to hardware devices
+    privileged: true
+    devices:
+      - /dev/snd:/dev/snd
+
+    # To access /dev/snd/*
+    group_add:
+      - audio
+
+    volumes:
+      # Host's ALSA config
+      - /etc/asound.conf:/etc/asound.conf:ro
