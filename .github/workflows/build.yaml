@@ -3,6 +3,10 @@ name: Build a Mopidy Docker image (arm64)
 on:
   push:
     branches: [master]
+    paths:
+      - 'Dockerfile'
+      - 'docker/**'
+      - '.github/workflows/**'
   workflow_dispatch:
 
 env:
