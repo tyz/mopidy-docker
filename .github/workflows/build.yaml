@@ -36,7 +36,7 @@ jobs:
         id: version
         run: |
           URL=https://apt.mopidy.com/dists/bookworm/main/binary-arm64/Packages
-          VERSION=$(curl -s ${URL} | grep -A1 '^Package: mopidy$' | awk '/^Version:/ { print $2 }' | sort | tail -n 1)
+          VERSION=$(curl -s ${URL} | grep -A1 '^Package: mopidy$' | awk '/^Version:/ { sub(/-.*$/, ""); print $2 }' | sort | tail -n 1)
           echo "Found version: ${VERSION}"
           echo "mopidy_version=${VERSION}" >> $GITHUB_OUTPUT
 
