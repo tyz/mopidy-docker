@@ -15,7 +15,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     curl -so /etc/apt/keyrings/mopidy.gpg https://apt.mopidy.com/mopidy-archive-keyring.gpg && \
     echo "deb [arch=arm64 signed-by=/etc/apt/keyrings/mopidy.gpg] https://apt.mopidy.com/ bookworm main contrib non-free" > /etc/apt/sources.list.d/mopidy.list && \
     apt update && \
-    apt install -y mopidy gstreamer1.0-plugins-bad python3-pip python3-yaml python3-toml
+    apt install -y mopidy gstreamer1.0-plugins-bad python3-pip python3-yaml
 
 RUN --mount=type=cache,target=/root/.cache,sharing=locked \
     python3 -m pip install --break-system-packages --root-user-action ignore \
@@ -23,8 +23,8 @@ RUN --mount=type=cache,target=/root/.cache,sharing=locked \
 
 COPY docker/mopidy.conf /etc/mopidy/mopidy.conf
 COPY docker/entrypoint.sh /entrypoint.sh
-COPY docker/yaml2toml.py /usr/local/bin/yaml2toml
-RUN chmod 0755 /entrypoint.sh /usr/local/bin/yaml2toml && \
+COPY docker/yaml2ini.py /usr/local/bin/yaml2ini
+RUN chmod 0755 /entrypoint.sh /usr/local/bin/yaml2ini && \
     chmod 0644 /etc/mopidy/mopidy.conf
 
 EXPOSE 6680
