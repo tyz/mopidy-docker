@@ -23,6 +23,7 @@ def convert():
         os.makedirs(os.path.dirname(OUTPUT_FILE), exist_ok=True)
 
         with open(OUTPUT_FILE, 'w') as f:
+            print("### Generated with yaml2toml", file=f)
             toml.dump(data, f)
 
         print(f"Success: file saved as {OUTPUT_FILE}")

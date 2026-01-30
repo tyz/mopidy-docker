@@ -27,8 +27,6 @@ COPY docker/yaml2toml.py /usr/local/bin/yaml2toml
 RUN chmod 0755 /entrypoint.sh /usr/local/bin/yaml2toml && \
     chmod 0644 /etc/mopidy/mopidy.conf
 
-USER mopidy
-
 EXPOSE 6680
 
 CMD ["/entrypoint.sh"]
