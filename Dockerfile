@@ -4,17 +4,13 @@ FROM debian:bookworm
 
 ENV DEBIAN_FRONTEND=noninteractive
 
+ADD --chmod=644 https://apt.mopidy.com/mopidy-archive-keyring.gpg /etc/apt/keyrings/mopidy.gpg
+RUN echo "deb [arch=arm64 signed-by=/etc/apt/keyrings/mopidy.gpg] http://apt.mopidy.com/ bookworm main contrib non-free" > /etc/apt/sources.list.d/mopidy.list
+
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,target=/var/lib/apt,sharing=locked \
     apt update && \
     apt upgrade -y && \
-    apt install -y apt-transport-https curl
-
-RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
-    --mount=type=cache,target=/var/lib/apt,sharing=locked \
-    curl -so /etc/apt/keyrings/mopidy.gpg https://apt.mopidy.com/mopidy-archive-keyring.gpg && \
-    echo "deb [arch=arm64 signed-by=/etc/apt/keyrings/mopidy.gpg] https://apt.mopidy.com/ bookworm main contrib non-free" > /etc/apt/sources.list.d/mopidy.list && \
-    apt update && \
     apt install -y mopidy gstreamer1.0-plugins-bad python3-pip python3-yaml
 
 RUN --mount=type=cache,target=/root/.cache,sharing=locked \
