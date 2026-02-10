@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
       - name: mopidy
-        image: ghcr.io/tyz/mopidy-docker:3.4.2
+        image: ghcr.io/tyz/mopidy-docker:latest
         imagePullPolicy: IfNotPresent
 
         securityContext:
