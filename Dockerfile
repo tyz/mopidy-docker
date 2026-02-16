@@ -9,6 +9,7 @@ RUN echo "deb [arch=arm64 signed-by=/etc/apt/keyrings/mopidy.gpg] http://apt.mop
 
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,target=/var/lib/apt,sharing=locked \
+    echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' >/etc/apt/apt.conf.d/keep-cache && \
     apt update && \
     apt upgrade -y && \
     apt install -y mopidy gstreamer1.0-plugins-bad python3-pip python3-yaml
