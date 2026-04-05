@@ -14,7 +14,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,target=/var/lib/apt,sharing=locked \
     --mount=type=cache,target=/var/cache/debconf \
     apt-get update && \
-    apt-get install --no-install-recommends -y mopidy gstreamer1.0-plugins-bad python3-pip python3-yaml
+    apt-get install --no-install-recommends -y mopidy gstreamer1.0-plugins-bad python3-pip
 
 RUN --mount=type=cache,target=/root/.cache,sharing=locked \
     python3 -m pip install --break-system-packages --root-user-action ignore \
@@ -22,8 +22,7 @@ RUN --mount=type=cache,target=/root/.cache,sharing=locked \
 
 COPY docker/mopidy.conf /etc/mopidy/mopidy.conf
 COPY docker/entrypoint.sh /entrypoint.sh
-COPY docker/yaml2ini.py /usr/local/bin/yaml2ini
-RUN chmod 0755 /entrypoint.sh /usr/local/bin/yaml2ini && \
+RUN chmod 0755 /entrypoint.sh && \
     chmod 0644 /etc/mopidy/mopidy.conf
 
 EXPOSE 6680

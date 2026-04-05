@@ -7,7 +7,7 @@ services:
     # Required for zeroconf
     network_mode: host
 
-    # For ALSA dmix
+    # For ALSA sharing with other pods, like Librespot
     ipc: host
 
     # Access to hardware devices
